@@ -64,12 +64,13 @@ try:
 		log.info("Module speech_recognition version %s succesfully loaded\n(C) %s > license %s\nSee the file license.txt for more copyright details." % (speech_recognition.__version__, speech_recognition.__author__, speech_recognition.__license__))
 	else:
 		speech_recognition = None
-		log.warning("The speech recognition feature is not available in NVDA 2026.1 and later because the speech_recognition module has been deprecated and is no longer supported.")
+		log.info("The speech recognition feature is disabled in NVDA 2026.1 and later because the bundled speech_recognition module is no longer supported.")
 except ImportError:
 	speech_recognition = None
 	log.warning("Import of the speech_recognition module failed. The speech recognition feature will not be available.")
 except AttributeError:
-	pass
+	speech_recognition = None
+	log.info("The speech recognition feature is disabled because the NVDA version could not be checked.")
 
 # Settings compatibility with older versions of NVDA
 from gui import settingsDialogs
